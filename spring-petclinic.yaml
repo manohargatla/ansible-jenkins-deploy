@@ -1,0 +1,50 @@
+---
+- name: Install Spring petclinic application
+  hosts: all
+  become: yes
+  tasks:
+    - name: install java
+      ansible.builtin.apt:
+        name: openjdk-17-jdk
+        update_cache: yes
+        state: present
+    - name: install maven
+      ansible.builtin.apt:
+        name: maven
+        update_cache: yes
+        state: present
+    - name: Create a group
+      ansible.builtin.group:
+        name: spring
+        state: present
+    - name: Create a user
+      ansible.builtin.user:
+        name: spring
+        create_home: yes
+        group: spring
+        state: present
+    - name: changing directory to repo
+      ansible.builtin.file:
+        path: /home/spring/
+        state: directory
+        owner: spring
+        group: spring
+        recurse: yes
+        mode: '0755'
+    - name: copy the artifact
+      ansible.builtin.copy:
+        src:  /home/spring/workspace/spring-petclinic/target/spring-petclinic-3.0.0-SNAPSHOT.jar
+        dest: /home/spring
+    - name: copy the service file
+      ansible.builtin.copy:
+        src: spc.service
+        dest: /etc/systemd/system/spc.service
+        owner: spring
+        group: spring
+        mode: '0755'
+    - name: restart spc service
+      ansible.builtin.systemd:
+        name: spc
+        daemon_reload: true
+        enabled: true
+        state: restarted
