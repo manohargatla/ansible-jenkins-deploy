@@ -20,7 +20,7 @@ pipeline {
         }
         stage('apply playbook') {
             steps {
-                sh 'ansible -i hosts -m ping all'
+                sh 'ansible -i ~/hosts -m ping all'
                 sh 'ansible-playbook -i hosts spring-petclinic.yaml'
             }
         }
