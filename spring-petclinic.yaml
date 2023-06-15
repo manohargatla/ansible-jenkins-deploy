@@ -35,6 +35,7 @@
       ansible.builtin.copy:
         src: /home/spring/workspace/new-spc/target/spring-petclinic-3.0.0-SNAPSHOT.jar
         dest: /home/spring/
+        remote_src: yes
     - name: copy the service file
       ansible.builtin.copy:
         src: spc.service
