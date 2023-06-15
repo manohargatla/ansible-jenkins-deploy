@@ -15,7 +15,6 @@ pipeline {
         }
         stage('build package') {
             steps {
-                sh 'maven --version'
                 sh 'cd ${WORKSPACE} && ./mvnw package'
             }
         }
