@@ -3,9 +3,15 @@ pipeline {
     stages {
         stage('clone sources') {
             steps {
+                git branch: 'main'
+                url: 'https://github.com/manohargatla/ansible-jenkins-deploy.git' 
+            }
+        }
+        stage('clone sources') {
+            steps {
                 sh 'git clone https://github.com/manohargatla/spring-petclinic.git' 
             }
-        }/*
+        }
         stage('build package') {
             steps {
                 sh 'cd ${WORKSPACE} && ./mvnw package'
@@ -16,7 +22,7 @@ pipeline {
                 sh 'ansible -i hosts -m ping all'
                 sh 'ansible-playbook -i hosts spring-petclinic.yaml'
             }
-        }*/
+        }
         
     }
 }
