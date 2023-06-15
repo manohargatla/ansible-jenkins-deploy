@@ -33,8 +33,8 @@
         mode: '0755'
     - name: copy the artifact
       ansible.builtin.copy:
-        src:  /home/spring/workspace/new-spc/target/spring-petclinic-3.0.0-SNAPSHOT.jar
-        dest: /home/spring
+        src: /home/spring/workspace/new-spc/target/spring-petclinic-3.0.0-SNAPSHOT.jar
+        dest: /home/spring/
     - name: copy the service file
       ansible.builtin.copy:
         src: spc.service
