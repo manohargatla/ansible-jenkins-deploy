@@ -7,7 +7,7 @@ pipeline {
                 url: 'https://github.com/manohargatla/ansible-jenkins-deploy.git' 
             }
         }
-        stage('clone sources') {
+        stage('clone repo') {
             steps {
                 sh 'git clone https://github.com/manohargatla/spring-petclinic.git' 
             }
