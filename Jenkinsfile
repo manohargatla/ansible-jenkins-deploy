@@ -9,8 +9,8 @@ pipeline {
         }
         stage('clone repo') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/manohargatla/spring-petclinic.git' 
+               
+                sh 'git clone https://github.com/manohargatla/spring-petclinic.git' 
             }
         }
         stage('build package') {
