@@ -10,14 +10,20 @@ pipeline {
         stage('clone repo') {
             steps {
                
-                sh 'git clone https://github.com/manohargatla/spring-petclinic.git' 
+                sh """
+                git clone https://github.com/manohargatla/spring-petclinic.git
+                cd spring-petclinic
+                ./mvnw package
+                cd ..
+                pwd
+                """
             }
         }
-        stage('build package') {
-            steps {
-                sh 'cd ${WORKSPACE} && ./mvnw package'
-            }
-        }
+        // stage('build package') {
+        //     steps {
+        //         sh 'cd ${WORKSPACE} && ./mvnw package'
+        //     }
+        // }
         stage('apply playbook') {
             steps {
                 sh 'ansible -i ~/hosts -m ping all'
