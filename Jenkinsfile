@@ -11,11 +11,22 @@ pipeline {
             steps {
                
                 sh """
-                git clone https://github.com/manohargatla/spring-petclinic.git
-                cd spring-petclinic
-                ./mvnw package
-                cd ..
-                pwd
+                if [ -d "spring-petclinic" ] 
+                then
+                    echo "Directory spring-petclinic exists." 
+                    cd spring-petclinic
+                    git pull
+                    ./mvnw package
+                    cd ..
+                    pwd
+                else
+                    git clone https://github.com/manohargatla/spring-petclinic.git
+                    cd spring-petclinic
+                    ./mvnw package
+                    cd ..
+                    pwd
+                fi
+                
                 """
             }
         }
